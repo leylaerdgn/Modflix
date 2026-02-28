@@ -1,0 +1,1527 @@
+/* GENEL AYARLAR */
+:root {
+    --bg-color: #f3eae4;       /* Bej Arka Plan (Biraz daha koyu) */
+    --text-color: #3A2E2A;     /* Sıcak Koyu Kahve */
+    --accent-color: #E8A6B8;   /* Soft Pink */
+    --hover-color: #D98CA4;    /* Koyu Pembe */
+    --card-bg: #FFFFFF;        /* Beyaz Kart */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* TOP BAR */
+.top-bar {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    display: flex; /* İçerikleri yan yana diz */
+    justify-content: space-between; /* Yazıyı sola, menüyü sağa it */
+    align-items: center; /* Dikeyde ortala */
+    padding: 20px 5%;
+    font-size: 1.2rem;
+}
+
+/* MENÜ LİNKLERİ */
+.top-bar nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin-left: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.top-bar nav a:hover {
+    color: #fff; /* Üzerine gelince beyaz olsun */
+}
+
+/* HAMBURGER MENÜ */
+.hamburger-menu-container {
+    display: inline-block;
+    position: relative;
+    margin-left: 25px;
+    transform: translateY(-12px); /* İkonu biraz yukarı kaydır */
+    z-index: 2000; /* Menünün diğer öğelerin üzerinde görünmesi için */
+}
+
+.hamburger-icon {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 20px;
+    width: 25px;
+}
+
+.bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* SIDEBAR MENU */
+.sidebar {
+    height: 100%;
+    width: 280px;
+    position: fixed;
+    z-index: 5000;
+    top: 0;
+    right: -280px; /* Başlangıçta sağda gizli */
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    overflow-x: hidden;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: 20px;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+    border-left: 1px solid rgba(232, 166, 184, 0.3);
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(58, 46, 42, 0.4);
+    z-index: 4999;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar a {
+    padding: 15px 25px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    display: block;
+    transition: 0.3s;
+    border-left: 4px solid transparent;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background: linear-gradient(90deg, rgba(232, 166, 184, 0.15), transparent);
+    color: var(--hover-color);
+    border-left-color: var(--accent-color);
+    padding-left: 30px; /* Hafif sağa kayma */
+}
+
+.close-sidebar-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: 0.3s;
+}
+
+.close-sidebar-btn:hover {
+    color: var(--hover-color);
+    transform: rotate(90deg);
+}
+
+/* HERO SECTION (GİRİŞ) */
+.hero {
+    height: 100vh; /* Tam ekran */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5%;
+    /* Arka plan resmi ve üzerine bej rengi filtre */
+    background-image: url('arka.plan.png');
+    background-size: cover; /* Resmi tüm alana yay */
+    background-position: center; /* Resmi ortala */
+    background-repeat: no-repeat;
+    position: relative; /* İçindeki mutlak konumlandırma için gerekli */
+}
+
+/* Hoş Geldiniz Yazısı */
+.hero-welcome {
+    position: absolute;
+    top: 5%; /* Üstten biraz boşluk bırakarak ortala */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Caveat', cursive;
+    font-size: 3rem;
+    color: var(--text-color);
+    z-index: 10;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.hero-right {
+    flex: 1;
+    padding-left: 0;
+    text-align: left;
+}
+
+.hero-right h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.hero-right p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.scroll-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: 2px solid transparent; /* İkincil butonla aynı boyutta olması için */
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.scroll-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.secondary-btn {
+    background-color: transparent;
+    border: 2px solid var(--accent-color);
+    color: var(--text-color);
+    margin-left: 15px;
+}
+
+.secondary-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* MOOD SECTION */
+.moods-container {
+    min-height: auto;
+    padding: 80px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    /* Container Shape & Position */
+    width: 92%;
+    max-width: 1400px;
+    margin: 40px auto;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    z-index: 0; /* Creates stacking context for pseudos */
+
+    /* Glassy Border & Shadow */
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 
+        0 30px 60px -15px rgba(183, 156, 255, 0.15), /* Lavender shadow glow */
+        inset 0 0 40px rgba(255, 255, 255, 0.7);
+    
+    /* Fallback background */
+    background-color: #F7EFE8;
+}
+
+/* Layer 1: Base + Animated Blobs (Deep Layer) */
+.moods-container::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: -2;
+    background-color: #F7EFE8; /* Base Cream */
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 79, 163, 0.35) 0%, transparent 50%),   /* Pink Blob */
+        radial-gradient(circle at 80% 20%, rgba(255, 179, 138, 0.45) 0%, transparent 45%),  /* Peach Blob */
+        radial-gradient(circle at 20% 80%, rgba(183, 156, 255, 0.4) 0%, transparent 45%);   /* Lavender Blob */
+    filter: blur(80px); /* Soften the blobs */
+    animation: blobFloat 25s infinite alternate ease-in-out;
+}
+
+/* Layer 2: Top Accents + Noise + Sparkle Pattern */
+.moods-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: 
+        /* Noise Texture */
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E"),
+        /* Mood Icons Pattern (Smile, Heart, Bolt, Cloud) */
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%233A2E2A' stroke-width='1.5' stroke-opacity='0.07' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10' cy='10' r='6' /%3E%3Cpath d='M8 11a3 3 0 0 0 4 0' /%3E%3Cpath d='M38 10c-1.5-2-4-2-5.5 0S30 14 33 18s5.5-6 5-8z' /%3E%3Cpath d='M10 40l3-4-2-1 4-5' /%3E%3Cpath d='M40 45a3 3 0 0 0 0-6 4 4 0 0 0-6 2 3 3 0 0 0 0 4' /%3E%3C/g%3E%3C/svg%3E"),
+        /* Mint Blob (Static/Corner) */
+        radial-gradient(circle at 95% 90%, rgba(57, 230, 198, 0.35) 0%, transparent 50%),
+        /* Gold Accent (Static/Corner) */
+        radial-gradient(circle at 5% 10%, rgba(255, 211, 106, 0.3) 0%, transparent 40%),
+        /* Subtle Dot Pattern */
+        radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+    background-size: 200px 200px, 60px 60px, 100% 100%, 100% 100%, 30px 30px; /* Pattern size */
+    mix-blend-mode: overlay; /* Blends nicely with the layer below */
+}
+
+/* Animation Definition */
+@keyframes blobFloat {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-2%, 5%) rotate(2deg); }
+    100% { transform: translate(5%, -2%) rotate(-2deg); }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+    .moods-container::before {
+        animation: none;
+    }
+}
+
+.moods-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* KART TASARIMI */
+.mood-card {
+    background-color: var(--card-bg);
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(58, 46, 42, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s;
+    border: 2px solid transparent; /* Hazırlık */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 160px;
+}
+
+.mood-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 40px rgba(232, 166, 184, 0.6);
+    border-color: var(--hover-color);
+}
+
+.mood-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.mood-card p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* POPÜLER FİLMLER BÖLÜMÜ */
+.popular-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px 0;
+    text-align: left;
+    
+    /* Çerçeve kaldırıldı - Şeffaf Görünüm */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    position: relative;
+}
+
+/* En Çok İzlenenler bölümünü (grid'den sonra gelen) aşağı it */
+.grid + .popular-section {
+    margin-top: 80px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.popular-section h3 {
+    font-size: 2rem;
+    margin-bottom: 0;
+    color: var(--text-color);
+    padding-left: 10px;
+}
+
+/* FİLTRE CHIP'LERİ */
+.filter-chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chip:hover, .chip.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.see-all-btn {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.see-all-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* KAYDIRMA OKLARI VE WRAPPER */
+.movie-slider-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0; /* Başlangıçta gizli, hover ile görünür */
+}
+
+.movie-slider-wrapper:hover .scroll-arrow {
+    opacity: 1;
+}
+
+.scroll-arrow:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.scroll-arrow.left { left: -20px; }
+.scroll-arrow.right { right: -20px; }
+
+.popular-scroll-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Grid View Toggle Styles */
+.popular-scroll-container.grid-view {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
+    overflow-x: visible;
+    flex-wrap: wrap;
+}
+
+.popular-scroll-container.grid-view .popular-movie-card {
+    width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    .popular-scroll-container.grid-view {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ÖZEL SCROLLBAR (PROGRESS BAR TARZI) */
+.popular-scroll-container::-webkit-scrollbar {
+    height: 6px; /* Daha ince */
+}
+
+.popular-scroll-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin: 0 20px;
+}
+
+.popular-scroll-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #E8A6B8, #B79CFF); /* Pembe-Lila Gradient */
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* YENİ KART TASARIMI */
+.popular-movie-card {
+    min-width: 150px;
+    width: 150px;
+    background: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.popular-movie-card:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    z-index: 5;
+}
+
+.popular-movie-card img {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Hover Overlay (Gradient + Bilgi) */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.popular-movie-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.card-meta {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+/* TOP 1-10 ROZETİ */
+.rank-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(135deg, #FF4FA3, #FFB38A);
+    color: white;
+    font-weight: bold;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+/* BÖLÜM AYIRICI (WAVE DIVIDER) */
+.section-divider {
+    width: 100%;
+    height: 1px;
+    margin: 60px 0;
+    margin: 15px 0;
+    background: none;
+    background-image: linear-gradient(90deg, transparent, rgba(232, 166, 184, 1), transparent);
+    box-shadow: 0 0 15px rgba(232, 166, 184, 0.8);
+    opacity: 0.8;
+}
+
+/* AI CHAT TEASER (SAYFA SONU) */
+.ai-chat-teaser {
+    width: 100%;
+    max-width: 800px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(232, 166, 184, 0.3);
+}
+
+.ai-chat-teaser h2 {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.teaser-input-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.teaser-input-container input {
+    flex: 1;
+    padding: 15px 20px;
+    border-radius: 30px;
+    border: 2px solid #eee;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.teaser-input-container input:focus {
+    border-color: var(--accent-color);
+}
+
+.teaser-input-container button {
+    padding: 15px 30px;
+    background-color: var(--text-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.teaser-input-container button:hover {
+    transform: scale(1.05);
+    background-color: var(--hover-color);
+}
+
+/* ÖNERİ EKRANI (OVERLAY) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(58, 46, 42, 0.9); /* Arka planı karart */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.overlay.hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.recommendation-content {
+    background-color: var(--bg-color);
+    padding: 40px;
+    border-radius: 20px;
+    width: 95%;
+    max-width: 800px; /* Chat için biraz daha geniş */
+    height: 80vh; /* Sabit yükseklik: Sayfanın uzamasını engeller */
+    max-height: 80vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-color);
+    z-index: 10;
+}
+
+/* CHAT ARAYÜZÜ */
+.chat-header {
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgba(0,0,0,0.05);
+    padding-bottom: 10px;
+}
+
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scroll-behavior: smooth; /* Yumuşak kaydırma */
+    min-height: 0; /* Flex yapısında scrollun sıkışmasını engeller */
+}
+
+/* ÖZEL SCROLLBAR TASARIMI */
+.chat-box::-webkit-scrollbar {
+    width: 10px; /* Daha belirgin ve şık genişlik */
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05); 
+    border-radius: 10px;
+    margin: 15px 0; /* Üstten ve alttan boşluk bırakır */
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: var(--accent-color); 
+    border-radius: 10px;
+    border: 2px solid var(--bg-color); /* Etrafında boşluk hissi vererek yumuşatır */
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: var(--hover-color); 
+}
+
+/* Mesaj Balonları */
+.message {
+    max-width: 80%;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.bot-message {
+    align-self: flex-start;
+    background-color: #fff;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: var(--accent-color);
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+/* Film Kartları (Yatay Kaydırma) */
+.movie-carousel {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.chat-movie-card {
+    width: 100%;
+    height: 165px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Hover Detayları */
+.movie-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(58, 46, 42, 0.96); /* Daha koyu arka plan (okunabilirlik için) */
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Yazı uzunsa yukarıdan başlasın */
+    align-items: center;
+    padding: 10px 5px; /* Üstten biraz boşluk */
+    text-align: center;
+    font-size: 0.75rem;
+    overflow-y: auto; /* Uzun yazılarda kaydırma çubuğu çıksın */
+}
+
+/* Kart içi ince scrollbar tasarımı */
+.movie-info-overlay::-webkit-scrollbar {
+    width: 4px;
+}
+.movie-info-overlay::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+.movie-info-overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+}
+
+.chat-movie-card:hover .movie-info-overlay {
+    opacity: 1;
+}
+
+/* Chat Input Alanı */
+.chat-input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input-area input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.chat-input-area button {
+    padding: 10px 20px;
+    background-color: var(--text-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.chat-input-area button:hover {
+    background-color: var(--hover-color);
+}
+
+/* SCROLL ANIMASYONU */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px); /* Aşağıdan yukarı kayma efekti için */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* HAKKIMIZDA SAYFASI */
+.about-section {
+    max-width: 1000px; /* Alanı genişlettik */
+    margin: 50px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px; /* Kutular arası boşluk arttı */
+}
+
+.about-box {
+    padding: 40px;
+    border-radius: 40px; /* Daha yumuşak, oval köşeler */
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    box-shadow: 0 15px 30px rgba(58, 46, 42, 0.08); /* Daha yumuşak ve derin gölge */
+    width: 75%; /* Tam genişlik yerine %75 kaplasın */
+    opacity: 0; /* Başlangıçta görünmez */
+    animation: slideUpFade 1s ease-out forwards; /* Animasyon */
+}
+
+/* ZIGZAG YERLEŞİM VE GECİKMELİ ANIMASYON */
+
+/* 1. Kutu: Sola Yasla */
+.about-box:nth-child(1) {
+    align-self: flex-start;
+    border-bottom-left-radius: 5px; /* Estetik dokunuş */
+    animation-delay: 0.3s;
+}
+
+/* 2. Kutu: Sağa Yasla */
+.about-box:nth-child(2) {
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+    animation-delay: 1.0s; /* Biraz daha geç gelsin */
+}
+
+/* 3. Kutu: Sola Yasla */
+.about-box:nth-child(3) {
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+    animation-delay: 1.7s; /* En son gelsin */
+}
+
+.box-pink {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.box-beige {
+    background-color: var(--card-bg); /* Beyaz/Bej kart rengi */
+    border: 2px solid var(--accent-color); /* Pembe çerçeve ile uyum */
+    color: var(--text-color);
+}
+
+.about-footer {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #666;
+    opacity: 0;
+    animation: slideUpFade 1s ease-out forwards 2.5s; /* En son yazı gelsin */
+}
+
+/* YUKARI KAYARAK GELME ANİMASYONU */
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FİLM DETAY MODALI */
+.movie-detail-content {
+    background-color: var(--bg-color);
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.detail-body {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.detail-body img {
+    width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    object-fit: cover;
+}
+
+.detail-info {
+    flex: 1;
+    min-width: 300px;
+    text-align: left;
+}
+
+.detail-info h2 {
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.tagline {
+    font-style: italic;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.meta-info {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.genres-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.genre-tag {
+    background-color: rgba(232, 166, 184, 0.15);
+    color: var(--text-color);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(232, 166, 184, 0.3);
+}
+
+.cast-section {
+    margin-top: 20px;
+}
+
+.cast-section h4 {
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+/* AUTH MODALLARI (Giriş/Kayıt) */
+.auth-content {
+    background-color: var(--bg-color);
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.auth-content h2 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.auth-content input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.auth-content button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.auth-content button:hover {
+    background-color: var(--hover-color);
+}
+
+.auth-switch {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.auth-switch a {
+    color: var(--hover-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* FLASH MESAJLARI */
+.flash-messages {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 4000;
+}
+
+.flash-msg {
+    padding: 15px 25px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(58, 46, 42, 0.15);
+    animation: slideIn 0.5s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.flash-msg.success { background-color: var(--accent-color); /* Pembe */ }
+.flash-msg.error { background-color: #d98ca4; /* Koyu Pembe/Kırmızımsı */ }
+.flash-msg.info { background-color: var(--text-color); /* Kahve */ }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* POPULAR PAGE GRID */
+.popular-page-container {
+    padding: 120px 5% 50px; /* Top padding for fixed navbar */
+    min-height: 100vh;
+}
+
+.popular-page-container h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text-color);
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 30px;
+}
+
+.movie-grid .popular-movie-card {
+    width: 100%; /* Full width of grid cell */
+}
+
+/* FAVORİ BUTONU */
+.fav-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    /* Glass Effect */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(4px);
+    border: none;
+    border-radius: 50%;
+    width: 28px; /* Küçültüldü */
+    height: 28px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.fav-btn:hover {
+    transform: scale(1.15);
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(232, 166, 184, 0.4);
+}
+
+.fav-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: transparent; /* İçi boş */
+    stroke: #fff; /* Beyaz çizgi (daha modern) */
+    stroke-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.fav-btn:hover svg {
+    stroke: #ff4757;
+    fill: #ff4757; /* Hoverda doluyor */
+}
+
+.fav-btn:active {
+    transform: scale(0.9);
+}
+
+/* Aktif (Tıklanmış) Durum */
+.fav-btn.active {
+    animation: heartBounce 0.6s;
+}
+
+.fav-btn.active svg {
+    fill: #ff4757; /* Kırmızı dolu */
+    stroke: #ff4757;
+}
+
+@keyframes heartBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.4); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* YAZIYOR EFEKTİ (TYPING INDICATOR) */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 15px 20px; /* Mesaj balonlarıyla uyumlu padding */
+    min-width: 60px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: typingAnimation 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingAnimation {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+/* KART YÜKLEME ANİMASYONU */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* FAVORİLER SAYFASI */
+.favorites-page,
+.watched-page,
+.watchlist-page {
+    padding: 120px 5% 60px;
+    min-height: 100vh;
+    /* Arka plan için yumuşak bej-pembe radial gradient */
+    background: radial-gradient(circle at center, #fdfbf9 0%, #f5e9e2 100%);
+
+    /* Hafif parlama (glow) efekti */
+    box-shadow: 0 0 20px rgba(232, 166, 184, 0.2);
+
+    /* Sinema temalı minimal ikon pattern */
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath fill='rgba(232,166,184,0.08)' d='M20 0 L0 20 L20 40 L40 20 Z'/%3E%3C/svg%3E");
+    background-size: 200px, auto;
+    
+    /* Genel text rengi */
+    color: #4a3a34;
+}
+
+.favorites-header,
+.watched-header,
+.watchlist-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.favorites-header h1,
+.watched-header h1,
+.watchlist-header h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #4a3a34;
+}
+
+.favorites-header p,
+.watched-header p,
+.watchlist-header p {
+    font-size: 1.1rem;
+    color: #8d7f79;
+    margin-bottom: 20px;
+}
+
+.header-divider {
+    width: 60px;
+    margin-bottom: 30px;
+    height: 3px;
+    background: linear-gradient(90deg, #e8b7c8, #d4a5b6);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.favorites-grid,
+.watched-grid,
+.watchlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.remove-fav-btn,
+.remove-watchlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #e8b7c8; /* Aktif pembe */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+    z-index: 2;
+}
+
+.remove-fav-btn:hover,
+.remove-watchlist-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+.remove-fav-btn svg,
+.remove-watchlist-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.fav-info,
+.watched-info,
+.watchlist-info {
+    padding: 15px 20px;
+}
+
+.fav-info h3,
+.watched-info h3,
+.watchlist-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #4a3a34;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.empty-icon {
+    color: #e8b7c8;
+    margin-bottom: 20px;
+}
+
+.empty-icon svg {
+    width: 64px;
+    height: 64px;
+}
+
+.empty-state h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #4a3a34;
+    margin-top: 20px;
+}
+
+.empty-state p {
+    color: #8d7f79;
+    margin-bottom: 30px;
+}
+
+.discover-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #4a3a34;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.discover-btn:hover {
+    background: #63514b;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid #e8b7c8;
+    background: transparent;
+    color: #4a3a34;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: #e8b7c8;
+    color: white;
+    border-color: #e8b7c8;
+}
+
+.watched-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(232, 183, 200, 0.9);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.watched-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #8d7f79;
+}
+
+/* LOADING SPINNER */
+.loading-spinner {
+    border: 4px solid rgba(232, 166, 184, 0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-left-color: var(--accent-color);
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.watchlist-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(232, 183, 200, 0.95);
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/*ORTAK KART ÖZELLİKLERİ*/
+.watched-card, .watchlist-card, .fav-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(74, 58, 52, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Glassmorphism özellikleri */
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    
+    cursor: pointer;
+    position: relative;
+}
+
+.watched-card:hover, .watchlist-card:hover, .fav-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(74, 58, 52, 0.1);
+    box-shadow: 0 0 20px rgba(232, 166, 184, 0.4);
+}
+
+.watched-poster, .watchlist-poster, .fav-poster {
+    position: relative;
+    width: 100%;
+    padding-top: 150%; /* 2:3 Aspect Ratio */
+    overflow: hidden;
+}
+
+.watched-poster img, .watchlist-poster img, .fav-poster img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.watched-card:hover .watched-poster img, 
+.watchlist-card:hover .watchlist-poster img, 
+.fav-card:hover .fav-poster img {
+    transform: scale(1.05);
+}
+

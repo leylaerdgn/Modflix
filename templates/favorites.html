@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Favorilerim - MoodMovie{% endblock %}
+
+{% block content %}
+<div class="favorites-page">
+    <div class="favorites-header">
+        <h1>Favorilerim</h1>
+        <p>Kaydettiğin filmleri burada bulabilirsin.</p>
+        <div class="header-divider"></div>
+    </div>
+
+    {% if favorites %}
+    <div class="favorites-grid">
+        {% for movie in favorites %}
+        <div class="fav-card" onclick="openMovieDetails({{ movie.movie_id }})">
+            <div class="fav-poster">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <button class="remove-fav-btn" onclick="event.stopPropagation(); toggleFavoriteInPage({{ movie.movie_id }}, this)">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </button>
+            </div>
+            <div class="fav-info">
+                <h3>{{ movie.title }}</h3>
+                <div class="fav-rating">⭐ <span>--</span></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h2>Henüz favori eklemedin</h2>
+        <p>Hoşuna giden filmleri kalp ikonuna tıklayarak buraya ekleyebilirsin.</p>
+        <a href="{{ url_for('main.index') }}" class="discover-btn">Film Keşfet</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

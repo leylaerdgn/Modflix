@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}İzleyeceklerim - MoodMovie{% endblock %}
+
+{% block content %}
+<div class="watchlist-page">
+    <div class="watchlist-header">
+        <h1>İzleyeceklerim</h1>
+        <p>Daha sonra izlemek için kaydettiğin filmler.</p>
+        <div class="header-divider"></div>
+    </div>
+
+    {% if watchlist_movies %}
+    <div class="watchlist-grid">
+        {% for movie in watchlist_movies %}
+        <div class="watchlist-card" onclick="openMovieDetails({{ movie.movie_id }})">
+            <div class="watchlist-poster">
+                {% if movie.poster_path %}
+                    <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                {% else %}
+                    <img src="https://placehold.co/500x750?text=No+Image" alt="{{ movie.title }}">
+                {% endif %}
+                <div class="watchlist-badge">📅 Planlandı</div>
+                <button class="remove-watchlist-btn" onclick="event.stopPropagation(); toggleWatchlistInPage({{ movie.movie_id }}, this)" title="Listeden Kaldır">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path><line x1="12" y1="17" x2="12" y2="17"></line></svg>
+                </button>
+            </div>
+            <div class="watchlist-info">
+                <h3>{{ movie.title }}</h3>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h2>İzleme listene henüz film eklemedin.</h2>
+        <p>İlgini çeken filmleri kaydederek kendi listeni oluştur.</p>
+        <a href="{{ url_for('main.index') }}" class="discover-btn">Keşfetmeye Başla</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

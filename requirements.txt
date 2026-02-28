@@ -1,0 +1,7 @@
+flask
+requests
+python-dotenv
+sentence-transformers
+numpy
+flask-login
+flask-sqlalchemy

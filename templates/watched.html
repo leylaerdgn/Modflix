@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}İzlediklerim - MoodMovie{% endblock %}
+
+{% block content %}
+<div class="watched-page">
+    <div class="watched-header">
+        <h1>İzlediklerim</h1>
+        <p>Bitirdiğin filmleri burada görebilirsin.</p>
+        <div class="header-divider"></div>
+    </div>
+
+    {% if watched_movies %}
+    <div class="watched-grid">
+        {% for movie in watched_movies %}
+        <div class="watched-card" onclick="openMovieDetails({{ movie.movie_id }})">
+            <div class="watched-poster">
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <div class="watched-badge">✔ İzledim</div>
+            </div>
+            <div class="watched-info">
+                <h3>{{ movie.title }}</h3>
+                <div class="watched-meta">
+                    <span class="watched-date">{{ movie.watched_at.strftime('%d.%m.%Y') if movie.watched_at else 'Tarih yok' }}</span>
+                    <span class="watched-rating">⭐ {{ movie.rating if movie.rating else '--' }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <h2>Henüz film izlemedin.</h2>
+        <p>İzlediğin filmleri işaretleyerek listeni oluşturabilirsin.</p>
+        <a href="{{ url_for('main.index') }}" class="discover-btn">Film Keşfet</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

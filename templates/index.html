@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- GİRİŞ BÖLÜMÜ (HERO SECTION) -->
+    <header class="hero">
+        <div class="hero-welcome">Hoş Geldiniz</div>
+        <div class="hero-right fade-in-section">
+            <h1>Hissine En Yakın Film,<br>Tek Tık Uzağında</h1>
+            <p>
+                Ruh haline en uygun filmi bulmak artık çok kolay. 
+                Sadece nasıl hissettiğini seç, gerisini bize bırak.
+                Sinema dünyasının derinliklerinde senin için saklanılan hikayeler var.
+            </p>
+            <a href="#mood-section" class="scroll-btn">Duygunu Seç</a>
+            <a href="#ai-chat-section" class="scroll-btn secondary-btn">Sana Sorayım</a>
+        </div>
+    </header>
+
+    <!-- DUYGU KUTUCUKLARI BÖLÜMÜ -->
+    <section id="mood-section" class="moods-container">
+        <h2 class="fade-in-section">Duygunu Seç</h2>
+        <p class="fade-in-section" style="font-family: 'Caveat', cursive; font-size: 1.8rem; margin-top: -20px; margin-bottom: 30px; color: #666;">Bugünkü ruh halini seç, sana uygun filmleri bulalım.</p>
+        <div class="grid fade-in-section">
+            <!-- Her kart tıklandığında script.js devreye girecek -->
+            <div class="mood-card" onclick="selectMood('mutlu')">
+                <h3>Mutlu</h3>
+                <p>Neşeni katlayacak filmler.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('uzgun')">
+                <h3>Üzgün</h3>
+                <p>Sana iyi gelecek hikayeler.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('ofkeli')">
+                <h3>Öfkeli</h3>
+                <p>Gerilimi azaltacak aksiyonlar.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('romantik')">
+                <h3>Romantik</h3>
+                <p>Kalbini ısıtan filmler.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('sikilmis')">
+                <h3>Sıkılmış</h3>
+                <p>Sıkıntını dağıtacak eğlenceli filmler.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('heyecan')">
+                <h3>Heyecan</h3>
+                <p>Adrenalin dolu anlar.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('gurur')">
+                <h3>Gurur</h3>
+                <p>Başarı ve azim öyküleri.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('yalnizlik')">
+                <h3>Yalnızlık</h3>
+                <p>Kendinle baş başa kal.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('hayalkirikligi')">
+                <h3>Hayal Kırıklığı</h3>
+                <p>Yeniden umut bulman için.</p>
+            </div>
+            <div class="mood-card" onclick="selectMood('stresli')">
+                <h3>Stresli</h3>
+                <p>Sakinleş ve rahatla.</p>
+            </div>
+        </div>
+
+        <!-- POPÜLER FİLMLER BÖLÜMÜ -->
+        <div class="popular-section fade-in-section">
+            <div class="section-header" style="margin-bottom: 5px;">
+                <h3>En Çok İzlenenler</h3>
+                <button class="see-all-btn" onclick="togglePopularGrid(this, 'popular-movies-container')">Tümünü Gör</button>
+            </div>
+            <p style="color: #666; font-size: 0.95rem; padding-left: 10px; margin-bottom: 20px;">Şu an herkesin izlediği filmler. Trendleri kaçırma.</p>
+            <div class="movie-slider-wrapper">
+                <button class="scroll-arrow left" onclick="scrollContainer('popular-movies-container', -1)">&#8249;</button>
+                <div class="popular-scroll-container" id="popular-movies-container"></div>
+                <button class="scroll-arrow right" onclick="scrollContainer('popular-movies-container', 1)">&#8250;</button>
+            </div>
+        </div>
+
+        <!-- WAVE DIVIDER -->
+        <div class="section-divider fade-in-section"></div>
+
+        <!-- EN ÇOK BEĞENİLENLER BÖLÜMÜ -->
+        <div class="popular-section fade-in-section">
+            <div class="section-header" style="margin-bottom: 5px;">
+                <h3>En Çok Beğenilenler</h3>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div class="filter-chips">
+                        <span class="chip active" onclick="switchTopRatedTab(this, 'global')">Global</span>
+                        <span class="chip" onclick="switchTopRatedTab(this, 'editor')">Editörün Seçimi</span>
+                    </div>
+                    <button class="see-all-btn" onclick="togglePopularGrid(this, 'top-rated-movies-container')">Tümünü Gör</button>
+                </div>
+            </div>
+            <p style="color: #666; font-size: 0.95rem; padding-left: 10px; margin-bottom: 20px;">Beğeni oranı yüksek, pişman etmeyen seçimler.</p>
+            <div class="movie-slider-wrapper">
+                <button class="scroll-arrow left" onclick="scrollContainer('top-rated-movies-container', -1)">&#8249;</button>
+                <div class="popular-scroll-container" id="top-rated-movies-container"></div>
+                <button class="scroll-arrow right" onclick="scrollContainer('top-rated-movies-container', 1)">&#8250;</button>
+            </div>
+        </div>
+
+        <!-- WAVE DIVIDER -->
+        <div class="section-divider fade-in-section"></div>
+    </section>
+
+    <!-- AI CHAT TEASER (SAYFA SONU) -->
+    <section id="ai-chat-section" class="ai-chat-teaser fade-in-section">
+        <h2>Yaşadıklarını En İyi Anlatan Filmi Birlikte Keşfedelim.</h2>
+        <p>Sadece ne yaşadığını anlat.<br>Senin hikayene en yakın senaryoyu bulalım.</p>
+        <div class="teaser-input-container">
+            <input type="text" id="teaser-input" placeholder="Örn: Yeni bir şehre taşındım, belirsizliklerle dolu ama umutlu bir gün...">
+            <button onclick="startChatFromTeaser()"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg></button>
+        </div>
+    </section>
+
+    <!-- FİLM ÖNERİLERİ MODALI / SAYFASI (Basitlik için aynı sayfada gizli tuttum, JS ile açacağız) -->
+    <div id="recommendation-overlay" class="overlay hidden">
+        <div class="recommendation-content">
+            <span class="close-btn" onclick="closeRecommendations()">&times;</span>
+            
+            <!-- CHAT ALANI -->
+            <div class="chat-header">
+                <h3>ModFlix Asistanı 🤖</h3>
+                <p>Senin sinematik pusulan</p>
+            </div>
+            <div id="chat-box" class="chat-box"></div>
+            <div class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Bir şeyler yaz... (Örn: Başka öner? veya Bilim Kurgu olsun)">
+                <button onclick="handleUserResponse()">Gönder</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI CHAT MODALI (Sana Sorayım İçin Ayrı) -->
+    <div id="ai-chat-modal" class="overlay hidden">
+        <div class="recommendation-content">
+            <span class="close-btn" onclick="closeAIChat()">&times;</span>
+            
+            <!-- CHAT ALANI -->
+            <div class="chat-header">
+                <h3>Senin Senaryon 🤖</h3>
+                <p>Hayatından bir kesit anlat, benzer bir film şeridini başlatalım.</p>
+            </div>
+            <div id="ai-chat-box" class="chat-box"></div>
+            <div class="chat-input-area">
+                <input type="text" id="ai-user-input" placeholder="Devam et...">
+                <button onclick="handleAIChatResponse()">Gönder</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

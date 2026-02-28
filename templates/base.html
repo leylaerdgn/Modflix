@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Duygu Analizi ile Film Öneri Sistemi{% endblock %}</title>
+    
+    <!-- Google Fonts: Poppins ve Caveat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Bağlantısı -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
+    
+    {% block head %}{% endblock %}
+    
+    <style>
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .nav-spacer {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SABİT NAVBAR -->
+    <div class="top-bar">
+        <p style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.5rem; margin: 0;">Modflix</p>
+        <nav>
+            
+            {% if current_user.is_authenticated %}
+                <span style="margin-left: 15px; font-size: 0.9rem;">{{ current_user.username }}</span>
+                <a href="{{ url_for('auth.logout') }}" style="margin-left: 10px; font-size: 0.9rem; border: 1px solid white; padding: 5px 10px; border-radius: 15px;">Çıkış</a>
+            {% else %}
+                <a href="javascript:void(0)" onclick="openModal('login-modal')">Giriş</a>
+                <a href="javascript:void(0)" onclick="openModal('register-modal')">Kayıt</a>
+            {% endif %}
+
+            <!-- HAMBURGER MENÜ -->
+            <div class="hamburger-menu-container">
+                <div class="hamburger-icon" onclick="toggleMenu()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Navbar'ın altında kalmaması için boşluk -->
+    <div class="nav-spacer"></div>
+
+    <!-- FLASH MESAJLARI -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash-msg {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- ANA İÇERİK ALANI -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- SIDEBAR MENU -->
+    <div id="sidebar-menu" class="sidebar">
+        <a href="javascript:void(0)" class="close-sidebar-btn" onclick="toggleMenu()">&times;</a>
+        <div class="sidebar-content">
+            <h3 style="padding: 0 25px; margin-bottom: 30px; color: var(--accent-color); font-family: 'Poppins', sans-serif; font-size: 1,5rem;">Modflix</h3>
+            <a href="{{ url_for('main.index') }}" class="{% if request.endpoint == 'main.index' %}active{% endif %}">Anasayfa</a>
+            <a href="{{ url_for('movie.favorites_page') }}" class="{% if request.endpoint == 'movie.favorites_page' %}active{% endif %}">Favorilerim</a>
+            <a href="{{ url_for('movie.watched_page') }}" class="{% if request.endpoint == 'movie.watched_page' %}active{% endif %}">İzlediklerim</a>
+            <a href="{{ url_for('movie.watchlist_page') }}" class="{% if request.endpoint == 'movie.watchlist_page' %}active{% endif %}">İzleyeceklerim</a>
+            <hr style="border: 0; border-top: 1px solid rgba(0,0,0,0.05); margin: 15px 25px;">
+            <a href="{{ url_for('main.about') }}" class="{% if request.endpoint == 'main.about' %}active{% endif %}">Hakkımızda</a>
+        </div>
+    </div>
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleMenu()"></div>
+
+    <!-- GLOBAL MODALLAR (Giriş/Kayıt her sayfada lazım olabilir) -->
+    <!-- Giriş Yap Modalı -->
+    <div id="login-modal" class="overlay hidden" style="z-index: 3000;">
+        <div class="auth-content">
+            <span class="close-btn" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Giriş Yap</h2>
+            <form action="{{ url_for('auth.login') }}" method="POST">
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+                <input type="password" name="password" placeholder="Şifre" required>
+                <button type="submit">Giriş Yap</button>
+            </form>
+            <p class="auth-switch">Hesabın yok mu? <a href="#" onclick="switchModal('login-modal', 'register-modal')">Kayıt Ol</a></p>
+        </div>
+    </div>
+
+    <!-- Kayıt Ol Modalı -->
+    <div id="register-modal" class="overlay hidden" style="z-index: 3000;">
+        <div class="auth-content">
+            <span class="close-btn" onclick="closeModal('register-modal')">&times;</span>
+            <h2>Kayıt Ol</h2>
+            <form action="{{ url_for('auth.register') }}" method="POST">
+                <input type="email" name="email" placeholder="E-posta" required>
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required>
+                <input type="password" name="password" placeholder="Şifre" required>
+                <button type="submit">Kayıt Ol</button>
+            </form>
+            <p class="auth-switch">Zaten hesabın var mı? <a href="#" onclick="switchModal('register-modal', 'login-modal')">Giriş Yap</a></p>
+        </div>
+    </div>
+
+    <!-- FİLM DETAY MODALI -->
+    <div id="movie-detail-modal" class="overlay hidden" style="z-index: 2000;">
+        <div class="movie-detail-content">
+            <span class="close-btn" onclick="closeMovieDetails()">&times;</span>
+            <div class="detail-body">
+                <img id="detail-poster" src="" alt="Film Afişi">
+                <div class="detail-info">
+                    <h2 id="detail-title">Film Başlığı</h2>
+                    <p id="detail-tagline" class="tagline"></p>
+                    <div class="meta-info">
+                        <span id="detail-rating"></span>
+                        <span id="detail-runtime"></span>
+                        <span id="detail-date"></span>
+                        <span id="detail-country" style="font-size: 1.2rem;"></span>
+                    </div>
+                    <div id="detail-genres" class="genres-container"></div>
+                    <p id="detail-overview"></p>
+                    <div class="cast-section">
+                        <h4>Oyuncular:</h4>
+                        <p id="detail-cast"></p>
+                    </div>
+                    <div class="action-buttons" style="margin-top: 20px; display: flex; gap: 10px;">
+                        <button id="btn-watched" onclick="toggleWatchedFromModal()" style="padding: 10px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                            👁️ İzledim
+                        </button>
+                        <button id="btn-watchlist" onclick="toggleWatchlistFromModal()" style="padding: 10px 20px; border-radius: 20px; border: 1px solid #ccc; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                            📅 İzleyeceğim
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Bağlantısı -->
+    <script>
+        const isAuthenticated = {{ current_user.is_authenticated | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
