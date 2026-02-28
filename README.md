@@ -40,6 +40,11 @@ Bu yöntem metnin anlamını analiz ederek daha derin ve bağlamsal öneriler ü
 - Flask-SQLAlchemy
 - TMDB API entegrasyonu
 
+**🔹 Frontend**
+- HTML  
+- CSS  
+- JavaScript  
+  
 **🔹 Yapay Zeka & NLP**
 - Sentence Transformers (MiniLM multilingual model)
 - NumPy ile vektör işlemleri
