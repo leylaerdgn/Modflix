@@ -3,6 +3,7 @@
 Modflix, iki farklı öneri yaklaşımını birleştiren yapay zeka destekli bir film öneri uygulamasıdır. Sistem hem duygu seçimine dayalı tür filtreleme hem de kullanıcının yazdığı metni anlamsal olarak analiz eden embedding tabanlı öneri mekanizması içerir.
 
 Sistem Mimarisi: İki Katmanlı Öneri Yapısı
+
 **1) Duygu Seç (Genre Tabanlı Filtreleme)**
 Duyguyu ilgili film türleriyle eşleştirir. Yazılan ek kriterleri analiz ederek TMDB filtrelerine dönüştürür. Belirtilen şartlara uygun filmleri listeler.
 Çalışma Prensibi:
