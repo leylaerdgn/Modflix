@@ -21,7 +21,8 @@ Her duygu kutucuğunda akıllı filtreleme olduğu için kullanıcı filtrelemel
 Hızlı ve basit öneri üretir.
 Bu katman daha çok kural tabanlı (rule-based) çalışır.
 
-**2) Yaşadıklarını Anlat (Anlamsal Benzerlik – AI Katmanı**
+**2) Yaşadıklarını Anlat (Anlamsal Benzerlik – AI Katmanı)**
+
 Kullanıcı yaşadığı bir durumu veya duygusal deneyimini metin olarak yazar. Sistem yaşadığına dair benzer konulu filmler önerir.
 Çalışma Prensibi:
 - Metni embedding’e (vektöre) dönüştürür.
@@ -49,6 +50,7 @@ Bu yöntem metnin anlamını analiz ederek daha derin ve bağlamsal öneriler ü
 - Hibrit filtreleme mantığı
 
 **🔹Geliştirilebilir Alanlar**
+
 Modflix projesi aktif olarak geliştirilebilir bir mimariye sahiptir. İleride eklenebilecek iyileştirmeler:
 1. Gerçek Diyalog Yönetimi
 - Çok turlu konuşma desteği
