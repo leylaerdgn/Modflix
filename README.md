@@ -32,8 +32,9 @@ Kullanıcı yaşadığı bir durumu veya duygusal deneyimini metin olarak yazar.
 - Kullanıcının yaşadığına benzer film önerileri sunar.
 Bu yöntem metnin anlamını analiz ederek daha derin ve bağlamsal öneriler üretir.
 
-**⚙️ Kullanılan Teknolojiler
-🔹 Backend
+**⚙️ Kullanılan Teknolojiler**
+
+**🔹 Backend**
 - Flask
 - Flask-Login
 - Flask-SQLAlchemy
