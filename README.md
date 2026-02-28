@@ -5,6 +5,7 @@ Modflix, iki farklı öneri yaklaşımını birleştiren yapay zeka destekli bir
 Sistem Mimarisi: İki Katmanlı Öneri Yapısı
 
 **1) Duygu Seç (Genre Tabanlı Filtreleme)**
+
 Duyguyu ilgili film türleriyle eşleştirir. Yazılan ek kriterleri analiz ederek TMDB filtrelerine dönüştürür. Belirtilen şartlara uygun filmleri listeler.
 Çalışma Prensibi:
 Kullanıcı bir duygu seçer (örneğin: mutlu, üzgün, stresli...).
