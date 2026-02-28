@@ -19,7 +19,7 @@ Her duygu kutucuğunda akıllı filtreleme olduğu için kullanıcı filtrelemel
 Hızlı ve basit öneri üretir.
 Bu katman daha çok kural tabanlı (rule-based) çalışır.
 
-2) Yaşadıklarını Anlat (Anlamsal Benzerlik – AI Katmanı):Kullanıcı yaşadığı bir durumu veya duygusal deneyimini metin olarak yazar. Sistem yaşadığına dair benzer konulu filmler önerir.
+## 2) Yaşadıklarını Anlat (Anlamsal Benzerlik – AI Katmanı):Kullanıcı yaşadığı bir durumu veya duygusal deneyimini metin olarak yazar. Sistem yaşadığına dair benzer konulu filmler önerir.
 Çalışma Prensibi:
 -Metni embedding’e (vektöre) dönüştürür.
 -Film veri setindeki embedding’lerle karşılaştırır.
