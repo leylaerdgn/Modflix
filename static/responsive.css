@@ -1,0 +1,177 @@
+/* ========================================= */
+/* MOBİL UYUM (RESPONSIVE) AYARLARI          */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    /* Üst Menü (Navbar) Küçültmeleri */
+    .top-bar {
+        padding: 15px 5%;
+        font-size: 1rem;
+    }
+    .top-bar nav a {
+        margin-left: 10px;
+        font-size: 0.85rem;
+        padding: 3px 8px !important;
+    }
+    .hamburger-menu-container {
+        margin-left: 15px;
+    }
+
+    /* Giriş / Karşılama Ekranı (Hero) */
+    .hero {
+        height: 100svh; /* Mobil tarayıcıların alt/üst çubuklarını hesaba katarak tam ekrana sığdırır */
+        background-size: 100% 100%; /* Resmi mobilde de kırpmadan ekrana tam sığdırır */
+    }
+    .hero-welcome {
+        font-size: 1.8rem;
+        top: 12%;
+    }
+    .hero-right h1 {
+        font-size: 1.3rem;
+    }
+    .hero-right p {
+        font-size: 1rem;
+        line-height: 1.5; /* Satır aralığını açarak okunabilirliği artırır */
+    }
+    .scroll-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    /* Film Detay Modalı - Dikey Hizalama */
+    .detail-body {
+        flex-direction: column;
+        align-items: center;
+    }
+    .detail-body img {
+        width: 100%;
+        max-width: 250px;
+    }
+    .detail-info {
+        min-width: 100%;
+        text-align: center;
+    }
+    .action-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* Hakkımızda Sayfası (Kutuları Ortala ve Tam Genişlik Yap) */
+    .about-box {
+        width: 100% !important;
+        padding: 25px;
+        border-radius: 20px !important;
+        align-self: center !important;
+    }
+
+    /* Yapay Zeka Sohbet & Öneri Arayüzü */
+    .recommendation-content {
+        padding: 20px;
+        width: 95%;
+    }
+    .message {
+        max-width: 90%;
+        font-size: 0.9rem;
+    }
+    
+    /* Duygu Kutucukları - Yan Yana 3 Tane */
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px; /* Mobilde aralarındaki boşluğu daralt */
+    }
+    .mood-card {
+        padding: 15px 5px;
+        height: 120px; /* Yüksekliği küçült */
+    }
+    .mood-card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 5px;
+    }
+    .mood-card p {
+        font-size: 0.65rem;
+        line-height: 1.2;
+    }
+
+    /* Başlıklar ve Boşluklar */
+    .moods-container, .popular-page-container {
+        padding: 40px 5%;
+    }
+    .moods-container h2 {
+        font-size: 1.8rem;
+    }
+    .popular-section h3 {
+        font-size: 1.5rem;
+    }
+
+    /* Popüler Filmler ve En Çok Beğenilenler - Mobilde 4 Film Gösterme */
+    .popular-scroll-container {
+        gap: 8px;
+        padding: 10px 5px;
+    }
+    .popular-movie-card {
+        min-width: 22vw; /* Ekranda yan yana yaklaşık 4 film görünmesi için */
+        width: 22vw;
+    }
+    .popular-movie-card img {
+        height: auto;
+        aspect-ratio: 2 / 3; /* Afişin bozulmadan orantılı küçülmesi için */
+    }
+    .popular-scroll-container.grid-view {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 8px;
+    }
+    
+    /* Kart İçi Detayların (Yazı, Puan, Buton) Mobilde Küçültülmesi */
+    .card-overlay {
+        padding: 5px;
+    }
+    .card-overlay div:first-child {
+        font-size: 0.65rem !important; /* Film başlığını küçült */
+        line-height: 1.1 !important;
+        white-space: nowrap; /* Uzun başlıkların kart dışına taşmasını önler */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .card-meta {
+        font-size: 0.55rem;
+        flex-direction: column; /* Yıldız puanı ve yılı alt alta alarak sığdır */
+        gap: 2px;
+        margin-top: 2px;
+    }
+    .rank-badge {
+        font-size: 0.6rem;
+        padding: 2px 5px;
+    }
+    .fav-btn {
+        width: 22px;
+        height: 22px;
+        top: 4px;
+        right: 4px;
+    }
+    .fav-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Sayfa Sonu Yapay Zeka (AI Chat Teaser) Kısmını Küçültme */
+    .ai-chat-teaser {
+        margin: 40px auto;
+        padding: 25px 15px;
+        width: 90%;
+    }
+    .ai-chat-teaser h2 {
+        font-size: 1.1rem; /* Yazıyı mobilde estetik duracak kadar küçülttük */
+        line-height: 1.4;
+    }
+    .teaser-input-container {
+        flex-direction: column; /* Mobilde input ve butonu alt alta aldık */
+        margin-top: 15px;
+    }
+    .teaser-input-container input,
+    .teaser-input-container button {
+        width: 100%; /* Tam genişlik verip tasarıma oturttuk */
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
